@@ -13,7 +13,7 @@ A project scaffold for quickly starting a site build with:
 ## Prerequisites
 
 - [Node and NPM](https://nodejs.org/)
-- [Netlify CLI](https://www.npmjs.com/package/netlify-cli)
+- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) _optional_
 
 ## Running locally
 
@@ -24,10 +24,26 @@ npm install
 # run the build and server locally
 npm run start
 
-# run the build and server locally via Netlify
-npm install netlify-cli -g
-netlify dev
-
 # run the production build
 npm run build
 ```
+
+## Netlify Dev
+
+```bash
+# Install the Netlify CLI globally
+npm install -g netlify-cli
+netlify dev
+```
+
+Serverless functions are located in `src/functions`
+
+A serverless functions pipeline is included via Netlify Dev. By running `netlify dev` you'll be able to execute any of your serverless functions directly like this:
+
+- /.netlify/functions/hello
+
+### Redirects and proxies
+
+Netlify's Redirects API can provide friendlier URLs as proxies to these URLs.
+
+- /api/hello
