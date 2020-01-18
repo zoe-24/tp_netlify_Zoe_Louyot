@@ -37,7 +37,7 @@ module.exports = function(eleventyConfig) {
    *
    * @link https://www.11ty.io/docs/config/#transforms
    */
-  if (process.env.NODE_ENV === 'production') {
+  if (process.env.ELEVENTY_ENV === 'production') {
     eleventyConfig.addTransform('htmlmin', require('./src/utils/htmlmin.js'))
   }
 
