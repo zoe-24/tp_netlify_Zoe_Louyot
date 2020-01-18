@@ -13,11 +13,11 @@
     "clean:cache": "rimraf ./.cache",
     "clean:site": "rimraf ./dist",
     "build": "run-s build:*",
-    "build:html": "cross-env ELEVENTY_ENV=production npx @11ty/eleventy",
-    "build:assets": "cross-env NODE_ENV=production npx parcel build ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps",
+    "build:html": "cross-env ELEVENTY_ENV=production eleventy",
+    "build:assets": "cross-env NODE_ENV=production parcel build ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps",
     "watch": "run-p watch:*",
-    "watch:html": "cross-env ELEVENTY_ENV=development npx @11ty/eleventy --serve --port=8080",
-    "watch:assets": "cross-env NODE_ENV=development npx parcel watch ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps --no-hmr",
+    "watch:html": "cross-env ELEVENTY_ENV=development eleventy --serve --port=8080",
+    "watch:assets": "cross-env NODE_ENV=development parcel watch ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps --no-hmr",
     "start": "npm run watch"
   },
   "dependencies": {
