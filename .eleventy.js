@@ -2,6 +2,13 @@ const { DateTime } = require('luxon')
 
 module.exports = function(eleventyConfig) {
   /**
+   * Opts in to a full deep merge when combining the Data Cascade.
+   *
+   * @link https://www.11ty.dev/docs/data-deep-merge/#data-deep-merge
+   */
+  eleventyConfig.setDataDeepMerge(true)
+
+  /**
    * Add custom watch targets
    *
    * @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
@@ -54,6 +61,18 @@ module.exports = function(eleventyConfig) {
         fn: function(snippet, match) {
           return snippet + match
         },
+      },
+    },
+    // Set local server 404 fallback
+    callbacks: {
+      ready: function(err, browserSync) {
+        const content_404 = fs.readFileSync('dist/404.html')
+
+        browserSync.addMiddleware('*', (req, res) => {
+          // Provides the 404 content without redirect.
+          res.write(content_404)
+          res.end()
+        })
       },
     },
   })
