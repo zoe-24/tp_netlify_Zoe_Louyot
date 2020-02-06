@@ -1,4 +1,4 @@
-const { DateTime } = require('luxon')
+const fs = require('fs')
 
 module.exports = function(eleventyConfig) {
   /**
@@ -27,17 +27,6 @@ module.exports = function(eleventyConfig) {
    *
    * @link https://www.11ty.io/docs/filters/
    */
-  eleventyConfig.addFilter('readableDate', dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: 'utc',
-    }).toFormat('LLLL d, y')
-  })
-
-  eleventyConfig.addFilter('htmlDate', dateObj => {
-    return DateTime.fromJSDate(dateObj, {
-      zone: 'utc',
-    }).toFormat('y-MM-dd')
-  })
 
   /**
    * Add Transforms
