@@ -18,6 +18,9 @@ A project scaffold for quickly starting a site build with:
 ## Running locally
 
 ```bash
+# Create your project
+npx degit "eastslopestudio/eleventy-starter" my-app && cd my-app
+
 # install the project dependencies
 npm install
 
