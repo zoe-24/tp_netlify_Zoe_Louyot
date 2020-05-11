@@ -3,10 +3,12 @@
 A project scaffold for quickly starting a site build with:
 
 - [Eleventy](https://11ty.dev) for templates and site generation
+- [Parcel JS](https://parceljs.org) for a simple asset build pipeline
+- [Turbolinks®](https://github.com/turbolinks/turbolinks) makes navigating your web application faster
+- [Alpine JS](https://github.com/alpinejs/alpine) A rugged, minimal framework for composing JavaScript behavior in your markup.
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow
 - [PurgeCSS](https://www.purgecss.com/) for optimizing css output
-- [Parcel JS](https://parceljs.org) for a simple asset build pipeline
-- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of prod environment
+- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of the prod environment
 
 ---
 
@@ -50,3 +52,14 @@ A serverless functions pipeline is included via Netlify Dev. By running `netlify
 Netlify's Redirects API can provide friendlier URLs as proxies to these URLs.
 
 - /api/hello
+
+---
+
+## Credits
+
+My heartfelt thanks to these people, whom I shamelessly copied ideas from:
+
+- Phil Hawksworth: [EleventyOne](https://github.com/philhawksworth/eleventyone)
+- Mike Riethmuller: [Supermaya](https://github.com/MadeByMike/supermaya)
+- Zach Leatherman: [zachleat.com](https://github.com/zachleat/zachleat.com)
+- Max Böck [Eleventastic](https://github.com/maxboeck/eleventastic)

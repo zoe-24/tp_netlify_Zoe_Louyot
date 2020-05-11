@@ -1,12 +1,51 @@
+const pluginRss = require('@11ty/eleventy-plugin-rss')
+const filters = require('./utils/filters')
+const transforms = require('./utils/transforms')
+const shortcodes = require('./utils/shortcodes')
+const iconsprite = require('./utils/iconsprite')
 const fs = require('fs')
 
 module.exports = function (eleventyConfig) {
   /**
-   * Opts in to a full deep merge when combining the Data Cascade.
+   * Add plugins
    *
-   * @link https://www.11ty.dev/docs/data-deep-merge/#data-deep-merge
+   * @link https://www.11ty.dev/docs/plugins/
    */
-  eleventyConfig.setDataDeepMerge(true)
+  eleventyConfig.addPlugin(pluginRss)
+
+  /**
+   * Add filters
+   *
+   * @link https://www.11ty.io/docs/filters/
+   */
+  Object.keys(filters).forEach((filterName) => {
+    eleventyConfig.addFilter(filterName, filters[filterName])
+  })
+
+  /**
+   * Add Transforms
+   *
+   * @link https://www.11ty.io/docs/config/#transforms
+   */
+  Object.keys(transforms).forEach((transformName) => {
+    eleventyConfig.addTransform(transformName, transforms[transformName])
+  })
+
+  /**
+   * Add shortcodes
+   *
+   * @link https://www.11ty.io/docs/shortcodes/
+   */
+  Object.keys(shortcodes).forEach((shortcodeName) => {
+    eleventyConfig.addShortcode(shortcodeName, shortcodes[shortcodeName])
+  })
+
+  /**
+   * Add async shortcodes
+   *
+   * @link https://www.11ty.dev/docs/languages/nunjucks/#asynchronous-shortcodes
+   */
+  eleventyConfig.addNunjucksAsyncShortcode('iconsprite', iconsprite)
 
   /**
    * Add custom watch targets
@@ -20,22 +59,25 @@ module.exports = function (eleventyConfig) {
    *
    * @link https://www.11ty.io/docs/copy/
    */
-  eleventyConfig.addPassthroughCopy('./src/site/favicon.ico')
+  eleventyConfig.addPassthroughCopy('src/assets/images')
+  eleventyConfig.addPassthroughCopy('src/assets/fonts')
+  eleventyConfig.addPassthroughCopy('src/site.webmanifest')
+  eleventyConfig.addPassthroughCopy('src/robots.txt')
 
   /**
-   * Add filters
+   * Add layout aliases
    *
-   * @link https://www.11ty.io/docs/filters/
+   * @link https://www.11ty.dev/docs/layouts/#layout-aliasing
    */
+  eleventyConfig.addLayoutAlias('base', 'base.njk')
+  eleventyConfig.addLayoutAlias('page', 'page.njk')
 
   /**
-   * Add Transforms
+   * Opts in to a full deep merge when combining the Data Cascade.
    *
-   * @link https://www.11ty.io/docs/config/#transforms
+   * @link https://www.11ty.dev/docs/data-deep-merge/#data-deep-merge
    */
-  if (process.env.ELEVENTY_ENV === 'production') {
-    eleventyConfig.addTransform('htmlmin', require('./src/utils/htmlmin.js'))
-  }
+  eleventyConfig.setDataDeepMerge(true)
 
   /**
    * Override BrowserSync Server options
@@ -68,9 +110,11 @@ module.exports = function (eleventyConfig) {
 
   return {
     dir: {
-      layouts: '_layouts',
-      input: 'src/site',
+      input: 'src',
       output: 'dist',
+      layouts: 'layouts',
+      includes: 'includes',
+      data: 'data',
     },
     passthroughFileCopy: true,
     templateFormats: ['njk', 'md'],
