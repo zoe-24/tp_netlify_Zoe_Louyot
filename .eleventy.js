@@ -1,9 +1,12 @@
+const fs = require('fs')
 const pluginRss = require('@11ty/eleventy-plugin-rss')
+const pluginNavigation = require('@11ty/eleventy-navigation')
+const markdownIt = require('markdown-it')
+
 const filters = require('./utils/filters')
 const transforms = require('./utils/transforms')
 const shortcodes = require('./utils/shortcodes')
 const iconsprite = require('./utils/iconsprite')
-const fs = require('fs')
 
 module.exports = function (eleventyConfig) {
   /**
@@ -12,6 +15,7 @@ module.exports = function (eleventyConfig) {
    * @link https://www.11ty.dev/docs/plugins/
    */
   eleventyConfig.addPlugin(pluginRss)
+  eleventyConfig.addPlugin(pluginNavigation)
 
   /**
    * Add filters
@@ -64,6 +68,21 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy('src/assets/fonts')
   eleventyConfig.addPassthroughCopy('src/site.webmanifest')
   eleventyConfig.addPassthroughCopy('src/robots.txt')
+
+  /**
+   * Set custom markdown library instance
+   *
+   * @link https://www.11ty.dev/docs/languages/liquid/#optional-set-your-own-library-instance
+   */
+  eleventyConfig.setLibrary(
+    'md',
+    markdownIt({
+      html: true,
+      breaks: true,
+      linkify: true,
+      typographer: true,
+    })
+  )
 
   /**
    * Add layout aliases
