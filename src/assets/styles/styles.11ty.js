@@ -48,6 +48,7 @@ module.exports = class {
       require('tailwindcss')(
         path.join(__dirname, '../../../tailwind.config.js')
       ),
+      require('postcss-nested'),
       ...(process.env.ELEVENTY_ENV === 'production' ? [purgecss, cssnano] : []),
     ])
       .process(rawCss, { from: rawFilepath })
