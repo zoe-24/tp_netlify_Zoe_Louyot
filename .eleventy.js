@@ -118,7 +118,7 @@ module.exports = function (eleventyConfig) {
       data: 'data',
     },
     passthroughFileCopy: true,
-    templateFormats: ['njk', 'md'],
+    templateFormats: ['njk', 'md', '11ty.js'],
     htmlTemplateEngine: 'njk',
     markdownTemplateEngine: 'njk',
   }
