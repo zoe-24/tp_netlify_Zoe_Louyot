@@ -3,7 +3,7 @@
 A project scaffold for quickly starting a site build with:
 
 - [Eleventy](https://11ty.dev) for templates and site generation
-- [Webpack](https://webpack.js.org) Straightforward asset bundling.
+- [Webpack](https://webpack.js.org) for straightforward JS asset bundling.
 - [Turbolinks®](https://github.com/turbolinks/turbolinks) makes navigating your web application faster
 - [Alpine JS](https://github.com/alpinejs/alpine) A rugged, minimal framework for composing JavaScript behavior in your markup.
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow
