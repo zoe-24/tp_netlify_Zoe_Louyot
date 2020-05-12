@@ -52,7 +52,7 @@ module.exports = function (eleventyConfig) {
    *
    * @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
    */
-  eleventyConfig.addWatchTarget('./src/assets/')
+  eleventyConfig.addWatchTarget('./src/assets')
 
   /**
    * Passthrough file copy
@@ -86,6 +86,7 @@ module.exports = function (eleventyConfig) {
    */
   eleventyConfig.setBrowserSyncConfig({
     notify: true,
+    reloadDebounce: 2000,
     snippetOptions: {
       rule: {
         match: /<\/head>/i,
