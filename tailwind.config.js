@@ -1,10 +1,7 @@
 module.exports = {
-  purge: [
-    './src/assets/js/**/*.js',
-    './src/**/*.njk',
-    './src/**/*.md',
-    './src/**/*.html',
-  ],
+  purge: {
+    enabled: false,
+  },
   theme: {
     extend: {},
   },

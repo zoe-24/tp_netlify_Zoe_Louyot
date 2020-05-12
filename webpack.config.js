@@ -1,20 +1,15 @@
 const path = require('path')
 const TerserJSPlugin = require('terser-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
-  entry: [
-    path.resolve(__dirname, 'src/assets/scripts/main.js'),
-    path.resolve(__dirname, 'src/assets/styles/main.css'),
-  ],
+  entry: path.resolve(__dirname, 'src/assets/scripts/main.js'),
   output: {
     path: path.resolve(__dirname, 'dist/assets'),
   },
   optimization: {
-    minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
+    minimizer: [new TerserJSPlugin({})],
   },
-  plugins: [new MiniCssExtractPlugin()],
+  plugins: [],
   module: {
     rules: [
       {
@@ -26,11 +21,6 @@ module.exports = {
             presets: ['@babel/preset-env'],
           },
         },
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
     ],
   },
