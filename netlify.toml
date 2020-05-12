@@ -6,7 +6,6 @@
 [dev]
   command = "npm run start"
   publish = "dist"
-  targetPort = 8080
   
 [[redirects]]
   from = "/api/*"
