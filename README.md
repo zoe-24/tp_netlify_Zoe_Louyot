@@ -3,7 +3,7 @@
 A project scaffold for quickly starting a site build with:
 
 - [Eleventy](https://11ty.dev) for templates and site generation
-- [Parcel JS](https://parceljs.org) for a simple asset build pipeline
+- [Laravel Mix](https://laravel-mix.com) An elegant wrapper around Webpack for the 80% use case.
 - [Turbolinks®](https://github.com/turbolinks/turbolinks) makes navigating your web application faster
 - [Alpine JS](https://github.com/alpinejs/alpine) A rugged, minimal framework for composing JavaScript behavior in your markup.
 - [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow

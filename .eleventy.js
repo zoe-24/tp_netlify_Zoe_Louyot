@@ -86,6 +86,7 @@ module.exports = function (eleventyConfig) {
    */
   eleventyConfig.setBrowserSyncConfig({
     notify: true,
+    reloadDebounce: 4000,
     snippetOptions: {
       rule: {
         match: /<\/head>/i,

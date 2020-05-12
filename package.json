@@ -14,10 +14,10 @@
     "clean:site": "del-cli dist",
     "build": "run-s clean build:* --print-label",
     "build:html": "cross-env ELEVENTY_ENV=production eleventy",
-    "build:assets": "cross-env NODE_ENV=production parcel build ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps",
+    "build:assets": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "run-s clean && run-p watch:* --print-label",
     "watch:html": "cross-env ELEVENTY_ENV=development eleventy --serve --port=8080",
-    "watch:assets": "cross-env NODE_ENV=development parcel watch ./src/assets/css/app.css ./src/assets/js/app.js --out-dir ./dist/assets --no-source-maps --no-hmr",
+    "watch:assets": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js --watch",
     "start": "npm run watch"
   },
   "devDependencies": {
@@ -27,13 +27,15 @@
     "del-cli": "^3.0.0",
     "dotenv": "^8.2.0",
     "html-minifier": "^4.0.0",
+    "laravel-mix": "^6.0.0-alpha.0",
     "luxon": "^1.24.1",
     "npm-run-all": "^4.1.5",
-    "parcel-bundler": "^1.12.4",
+    "postcss-import": "^12.0.1",
     "postcss-nested": "^4.2.1",
     "prettier": "^2.0.5",
     "svg-sprite": "^1.5.0",
-    "tailwindcss": "^1.4.6"
+    "tailwindcss": "^1.4.6",
+    "vue-template-compiler": "^2.6.11"
   },
   "dependencies": {
     "alpinejs": "^2.3.3",
