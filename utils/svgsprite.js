@@ -5,7 +5,7 @@ const glob = require('glob')
 const File = require('vinyl')
 const SVGSpriter = require('svg-sprite')
 
-const cwd = path.resolve('src/assets/icons')
+const cwd = path.resolve('src/assets/svg')
 const spriteConfig = {
   mode: {
     inline: true,
@@ -17,7 +17,7 @@ const spriteConfig = {
   shape: {
     transform: ['svgo'],
     id: {
-      generator: 'icon-%s',
+      generator: 'symbol-%s',
     },
   },
   svg: {
@@ -42,7 +42,7 @@ module.exports = async () => {
     })
   }
 
-  // Get all SVG icon files in working directory
+  // Get all SVG files in working directory
   const getFiles = util.promisify(glob)
   const files = await getFiles('**/*.svg', { cwd: cwd })
 

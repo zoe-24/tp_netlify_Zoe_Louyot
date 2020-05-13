@@ -6,7 +6,7 @@ const markdownIt = require('markdown-it')
 const filters = require('./utils/filters')
 const transforms = require('./utils/transforms')
 const shortcodes = require('./utils/shortcodes')
-const iconsprite = require('./utils/iconsprite')
+const svgsprite = require('./utils/svgsprite')
 
 module.exports = function (eleventyConfig) {
   /**
@@ -49,7 +49,7 @@ module.exports = function (eleventyConfig) {
    *
    * @link https://www.11ty.dev/docs/languages/nunjucks/#asynchronous-shortcodes
    */
-  eleventyConfig.addNunjucksAsyncShortcode('iconsprite', iconsprite)
+  eleventyConfig.addNunjucksAsyncShortcode('svgsprite', svgsprite)
 
   /**
    * Add custom watch targets
