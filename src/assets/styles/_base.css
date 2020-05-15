@@ -1,9 +1,11 @@
 /**
  * Smoothly animate the scroll position, instead of a straight jump.
  */
+/*
 html {
   scroll-behavior: smooth;
 }
+*/
 
 /**
  * Selectively disable the default focus style by selecting for the case when the polyfill 
