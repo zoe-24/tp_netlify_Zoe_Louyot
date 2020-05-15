@@ -1,4 +1,11 @@
 /**
+ * Smoothly animate the scroll position, instead of a straight jump.
+ */
+html {
+  scroll-behavior: smooth;
+}
+
+/**
  * Selectively disable the default focus style by selecting for the case when the polyfill 
  * is loaded and [data-focus-visible-added] attribute is not applied to the element:
  *
@@ -18,7 +25,7 @@
  * @link https://github.com/turbolinks/turbolinks#displaying-progress
  */
 .turbolinks-progress-bar {
-  @apply h-2 bg-blue-500;
+  @apply h-1 bg-red-500;
 }
 
 /**
@@ -32,4 +39,11 @@
     animation-duration: 0.01s !important;
     transition-duration: 0.01s !important;
   }
+}
+
+/**
+ * ::selection selector: color, background, cursor, and outline.
+ */
+::selection {
+  @apply bg-blue-500 text-white;
 }
