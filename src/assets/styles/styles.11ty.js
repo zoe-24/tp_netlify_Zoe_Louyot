@@ -35,6 +35,7 @@ module.exports = class {
       permalink: `assets/${fileName}`,
       rawFilepath,
       rawCss: await fs.readFileSync(rawFilepath),
+      eleventyExcludeFromCollections: true,
     }
   }
 
