@@ -48,7 +48,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "alpinejs": "^2.3.3",
+    "alpinejs": "^2.3.5",
     "focus-visible": "^5.1.0",
     "turbolinks": "^5.2.0"
   }
