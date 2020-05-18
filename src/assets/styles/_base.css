@@ -8,29 +8,6 @@ html {
 */
 
 /**
- * Selectively disable the default focus style by selecting for the case when the polyfill 
- * is loaded and [data-focus-visible-added] attribute is not applied to the element:
- *
- * @link https://github.com/WICG/focus-visible#2-update-your-css
- */
-.js-focus-visible :focus:not([data-focus-visible-added]) {
-  @apply outline-none;
-}
-
-/**
- * During Turbolinks navigation, the browser will not display its native progress 
- * indicator. Turbolinks installs a CSS-based progress bar to provide feedback while 
- * issuing a request. The progress bar is a <div> element with the class name 
- * turbolinks-progress-bar. Its default styles appear first in the document and can 
- * be overridden by rules that come later.
- * 
- * @link https://github.com/turbolinks/turbolinks#displaying-progress
- */
-.turbolinks-progress-bar {
-  @apply h-1 bg-red-500;
-}
-
-/**
  * Disable animations if the user has turned on the a11y option for reduced motion due to 
  * vestibular disorders etc.
  * 
@@ -48,4 +25,14 @@ html {
  */
 ::selection {
   @apply bg-blue-500 text-white;
+}
+
+/**
+ * Selectively disable the default focus style by selecting for the case when the polyfill 
+ * is loaded and [data-focus-visible-added] attribute is not applied to the element:
+ *
+ * @link https://github.com/WICG/focus-visible#2-update-your-css
+ */
+.js-focus-visible :focus:not([data-focus-visible-added]) {
+  @apply outline-none;
 }
