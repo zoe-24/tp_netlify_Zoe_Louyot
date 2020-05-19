@@ -28,6 +28,17 @@ html {
 }
 
 /**
+ * `x-cloak` attributes are removed from elements when Alpine initializes. 
+ * This is useful for hiding pre-initialized DOM.
+ * 
+ * @link https://github.com/alpinejs/alpine#x-cloak
+ * 
+ */
+[x-cloak] {
+  @apply hidden;
+}
+
+/**
  * Selectively disable the default focus style by selecting for the case when the polyfill 
  * is loaded and [data-focus-visible-added] attribute is not applied to the element:
  *
