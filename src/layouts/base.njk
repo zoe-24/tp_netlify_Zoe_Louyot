@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title or meta.title }}</title>
+    <title>
+    <title>
+        {% if seo.title %}
+            {{ seo.title }} 
+        {% else %} 
+            {{ title }} | {{meta.title }}
+        {% endif %}
+    </title>
     <link rel="stylesheet" href="{{ '/assets/main.css' | url }}">   
     {% include "meta.njk" %}
 </head>
