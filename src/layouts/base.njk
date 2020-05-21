@@ -4,12 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>
-    <title>
-        {% if seo.title %}
+        {%- if seo.title -%}
             {{ seo.title }} 
-        {% else %} 
+        {%- else -%} 
             {{ title }} | {{meta.title }}
-        {% endif %}
+        {%- endif -%}
     </title>
     <link rel="stylesheet" href="{{ '/assets/main.css' | url }}">   
     {% include "meta.njk" %}
