@@ -2,12 +2,12 @@
 
 A project scaffold for quickly starting a site build with:
 
-- [Eleventy](https://11ty.dev) for templates and site generation
+- [Eleventy](https://11ty.dev) for templates and site generation.
 - [Webpack](https://webpack.js.org) for straightforward JS asset bundling.
 - [Alpine JS](https://github.com/alpinejs/alpine) A rugged, minimal framework for composing JavaScript behavior in your markup.
-- [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow
-- [PurgeCSS](https://www.purgecss.com/) for optimizing css output
-- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of the prod environment
+- [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
+- [PurgeCSS](https://www.purgecss.com/) for optimizing css output.
+- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of the prod environment.
 
 ---
 
