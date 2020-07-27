@@ -1,6 +1,10 @@
 # Eleventy Starter
 
-A project scaffold for quickly starting a site build with:
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9b8df50f-2855-4db2-968f-a0e9a4221c83/deploy-status)](https://app.netlify.com/sites/ess-eleventy-starter/deploys)
+
+Demo: https://ess-eleventy-starter.netlify.app
+
+Eleventy Starter is a project scaffold for quickly starting a site with:
 
 - [Eleventy](https://11ty.dev) for templates and site generation.
 - [Webpack](https://webpack.js.org) for straightforward JS asset bundling.
