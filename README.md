@@ -13,6 +13,13 @@ Eleventy Starter is a project scaffold for quickly starting a site with:
 - [PurgeCSS](https://www.purgecss.com/) for optimizing css output.
 - [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of the prod environment.
 
+## Deploy this to your own site
+
+These builders are amazing—try them out to get your own Eleventy site in a few clicks!
+
+* [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/eastslopestudio/eleventy-starter)
+* [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=eastslopestudio%2Feleventy-starter)
+
 ---
 
 ## Prerequisites
