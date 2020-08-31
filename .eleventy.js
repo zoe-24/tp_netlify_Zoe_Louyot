@@ -7,7 +7,6 @@ const pluginNavigation = require('@11ty/eleventy-navigation')
 const filters = require('./utils/filters')
 const transforms = require('./utils/transforms')
 const shortcodes = require('./utils/shortcodes')
-const svgsprite = require('./utils/svgsprite')
 const markdown = require('./utils/markdown')
 
 // You can now require config options using @config
@@ -48,13 +47,6 @@ module.exports = function (eleventyConfig) {
   Object.keys(shortcodes).forEach((shortcodeName) => {
     eleventyConfig.addShortcode(shortcodeName, shortcodes[shortcodeName])
   })
-
-  /**
-   * Add async shortcodes
-   *
-   * @link https://www.11ty.dev/docs/languages/nunjucks/#asynchronous-shortcodes
-   */
-  eleventyConfig.addNunjucksAsyncShortcode('svgsprite', svgsprite)
 
   /**
    * Add custom watch targets

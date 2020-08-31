@@ -53,7 +53,6 @@
     "postcss-nested": "^4.2.3",
     "prettier": "^2.1.1",
     "sharp": "^0.26.0",
-    "svg-sprite": "^1.5.0",
     "tailwindcss": "^1.7.6",
     "terser-webpack-plugin": "^4.1.0",
     "webpack": "^4.44.1",
