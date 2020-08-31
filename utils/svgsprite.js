@@ -5,7 +5,11 @@ const glob = require('glob')
 const File = require('vinyl')
 const SVGSpriter = require('svg-sprite')
 
-const cwd = path.resolve('src/assets/svg')
+// Get config
+const config = require('@config')
+
+const cwd = path.join(process.cwd(), config.dir.input, config.dir.svg)
+
 const spriteConfig = {
   mode: {
     inline: true,
@@ -44,10 +48,10 @@ module.exports = async () => {
 
   // Get all SVG files in working directory
   const getFiles = util.promisify(glob)
-  const files = await getFiles('**/*.svg', { cwd: cwd })
+  const files = await getFiles('**/*.svg', { cwd })
 
   // Add them all to the spriter
-  files.forEach(function (file) {
+  files.forEach((file) => {
     spriter.add(
       new File({
         path: path.join(cwd, file),

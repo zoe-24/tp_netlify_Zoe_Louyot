@@ -17,8 +17,8 @@ Eleventy Starter is a project scaffold for quickly starting a site with:
 
 These builders are amazing—try them out to get your own Eleventy site in a few clicks!
 
-* [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/eastslopestudio/eleventy-starter)
-* [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=eastslopestudio%2Feleventy-starter)
+- [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/eastslopestudio/eleventy-starter)
+- [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=eastslopestudio%2Feleventy-starter)
 
 ---
 
@@ -67,9 +67,10 @@ Netlify's Redirects API can provide friendlier URLs as proxies to these URLs.
 
 ## Credits
 
-My heartfelt thanks to these people, whom I shamelessly copied ideas from:
+My heartfelt thanks to these people, whom I shamelessly copied code and ideas from:
 
 - Phil Hawksworth: [EleventyOne](https://github.com/philhawksworth/eleventyone)
 - Mike Riethmuller: [Supermaya](https://github.com/MadeByMike/supermaya)
 - Zach Leatherman: [zachleat.com](https://github.com/zachleat/zachleat.com)
 - Max Böck [Eleventastic](https://github.com/maxboeck/eleventastic)
+- Greg Ives [Twelvety](https://github.com/gregives/Twelvety)
