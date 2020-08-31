@@ -6,9 +6,9 @@ const jsonfile = require('jsonfile')
 // Get config
 const config = require('@config')
 
-// Asset shortcode for saving hashed assets
-const saveAsset = require('./asset'),
-  { hashContent } = saveAsset
+// Asset shortcode for saving hashed media
+const saveMedia = require('./media'),
+  { hashContent } = saveMedia
 
 // Sizes for responsive image in intervals of 160 i.e. 160, 320, ..., 1920
 const SIZES = Array.from(new Array(12), (_, index) => (index + 1) * 160)
@@ -37,13 +37,13 @@ function deasyncSharp(image, sharpFunction) {
 
 // Get image path from src
 function getImagePath(src) {
-  const index = src.indexOf(config.dir.images)
-  const position = index >= 0 ? index + config.dir.images.length : 0
+  const index = src.indexOf(config.dir.media)
+  const position = index >= 0 ? index + config.dir.media.length : 0
   const imageFilename = src.substring(position)
   return path.join(
     process.cwd(),
     config.dir.input,
-    config.dir.images,
+    config.dir.media,
     imageFilename
   )
 }
@@ -66,7 +66,7 @@ function saveImageFormat(image, width, format) {
 
   // Save buffer of formatted image
   const buffer = deasyncSharp(formatted, 'toBuffer')
-  return saveAsset(buffer, format)
+  return saveMedia(buffer, format)
 }
 
 // Get the average color from an image

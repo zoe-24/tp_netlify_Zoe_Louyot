@@ -5,7 +5,7 @@ const crypto = require('crypto')
 // Get config
 const config = require('@config')
 
-// Size of asset hash
+// Size of media hash
 const SIZE = 8
 
 // Hash function
@@ -17,26 +17,22 @@ module.exports = (content, extension) => {
   // Hash content
   const hash = hashContent(content)
 
-  // Output assets directory
-  const assetsDir = path.join(
-    process.cwd(),
-    config.dir.output,
-    config.dir.assets
-  )
+  // Output media directory
+  const mediaDir = path.join(process.cwd(), config.dir.output, config.dir.media)
 
-  // Ensure the assets folder exists
-  if (!fs.existsSync(assetsDir)) {
-    fs.mkdirSync(assetsDir, {
+  // Ensure the media folder exists
+  if (!fs.existsSync(mediaDir)) {
+    fs.mkdirSync(mediaDir, {
       recursive: true,
     })
   }
 
-  // Save hashed asset file
+  // Save hashed media file
   const filename = `${hash}.${extension}`
-  fs.writeFileSync(path.join(assetsDir, filename), content)
+  fs.writeFileSync(path.join(mediaDir, filename), content)
 
   // Output root path from output directory
-  return path.posix.join('/', config.dir.assets, filename)
+  return path.posix.join('/', config.dir.media, filename)
 }
 
 module.exports.hashContent = hashContent

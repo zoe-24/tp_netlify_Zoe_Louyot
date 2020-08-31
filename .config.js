@@ -9,7 +9,7 @@ module.exports = {
     // ⬇ These are custom and used by various utilities etc.
     assets: 'assets',
     styles: 'assets/styles',
-    images: 'assets/images',
     svg: 'assets/svg',
+    media: 'media',
   },
 }
