@@ -60,9 +60,9 @@ function loadCache() {
 }
 
 // Save image as the given size and format
-function saveImageFormat(image, width, format) {
+function saveImageFormat(image, origWidth, format) {
   // Resize image and format with given quality
-  const formatted = image.clone().resize(width)[format]({
+  const formatted = image.clone().resize(origWidth)[format]({
     quality: QUALITY,
   })
 
@@ -83,12 +83,14 @@ function getAverageColor(image) {
   return `${values.length < 4 ? 'rgb' : 'rgba'}(${values.join(',')})`
 }
 
-module.exports = function (
+module.exports = (
   src,
+  width = null,
+  height = null,
   alt,
-  sizes = '90vw, (min-width: 1280px) 1152px',
+  sizes = '90vw, (min-origWidth: 1280px) 1152px',
   loading = 'lazy'
-) {
+) => {
   if (alt === undefined) {
     throw new Error('Images should always have an alt tag')
   }
@@ -106,35 +108,38 @@ module.exports = function (
   const cachePicture = cache.hasOwnProperty(imageHash) && cache[imageHash]
 
   // Get metadata from original image
-  const { format, height, width } = deasyncSharp(original, 'metadata')
+  const { format, height: origHeight, width: origWidth } = deasyncSharp(
+    original,
+    'metadata'
+  )
 
   // Average color used for background while image loads
   const color = getAverageColor(original)
 
   // Save responsive images in same format
   const sameFormat = Object.fromEntries(
-    SIZES.map((width) => {
-      if (cachePicture && cachePicture.same.hasOwnProperty(width))
-        return [width, cachePicture.same[width]]
-      return [width, saveImageFormat(original, width, format)]
+    SIZES.map((origWidth) => {
+      if (cachePicture && cachePicture.same.hasOwnProperty(origWidth))
+        return [origWidth, cachePicture.same[origWidth]]
+      return [origWidth, saveImageFormat(original, origWidth, format)]
     })
   )
 
-  // Image descriptor with width
+  // Image descriptor with origWidth
   const sameFormatDesc = Object.keys(sameFormat).map((size) => {
     return `${sameFormat[size]} ${size}w`
   })
 
   // Save responsive images in webp format
   const webpFormat = Object.fromEntries(
-    SIZES.map((width) => {
-      if (cachePicture && cachePicture.webp.hasOwnProperty(width))
-        return [width, cachePicture.webp[width]]
-      return [width, saveImageFormat(original, width, 'webp')]
+    SIZES.map((origWidth) => {
+      if (cachePicture && cachePicture.webp.hasOwnProperty(origWidth))
+        return [origWidth, cachePicture.webp[origWidth]]
+      return [origWidth, saveImageFormat(original, origWidth, 'webp')]
     })
   )
 
-  // Image descriptor with width
+  // Image descriptor with origWidth
   const webpFormatDesc = Object.keys(webpFormat).map((size) => {
     return `${webpFormat[size]} ${size}w`
   })
@@ -143,7 +148,7 @@ module.exports = function (
   const fallback = sameFormat[SIZES[SIZES.length - 1]]
 
   // Aspect ratio for padding-bottom
-  const ratio = ((height / width) * 100).toFixed(3)
+  const ratio = ((origHeight / origWidth) * 100).toFixed(3)
 
   // Responsive picture with srcset and native lazy loading
   const picture = `
@@ -154,7 +159,9 @@ module.exports = function (
       <source srcset="${sameFormatDesc.join(
         ','
       )}" sizes="${sizes}" type="image/${format}">
-      <img src="${fallback}" alt="${alt}" loading="${loading}">
+      <img src="${fallback}" alt="${alt}" ${width ? `width="${width}"` : ''} ${
+    height ? `height="${height}"` : ''
+  } loading="${loading}">
     </picture>
   `
 
