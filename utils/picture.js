@@ -85,9 +85,9 @@ function getAverageColor(image) {
 
 module.exports = (
   src,
+  alt,
   width = null,
   height = null,
-  alt,
   sizes = '90vw, (min-origWidth: 1280px) 1152px',
   loading = 'lazy'
 ) => {

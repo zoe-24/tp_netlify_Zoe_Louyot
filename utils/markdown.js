@@ -34,6 +34,6 @@ module.exports = markdownIt({
         } ${height ? `height="${height}"` : ''} loading="lazy">`
       }
 
-      return picture(src, width, height, alt)
+      return picture(src, alt, width, height)
     }
   })
