@@ -10,8 +10,8 @@ const config = require('@config')
 const saveMedia = require('./media'),
   { hashContent } = saveMedia
 
-// Sizes for responsive image in intervals of 160 i.e. 160, 320, ..., 1920
-const SIZES = Array.from(new Array(12), (_, index) => (index + 1) * 160)
+// Sizes for responsive image in intervals of 320 i.e. 320, ..., 1920
+const SIZES = Array.from(new Array(6), (_, index) => (index + 1) * 320)
 
 // File to save responsive image cache
 const CACHE_FILE = path.resolve('.picture.cache')
@@ -26,7 +26,9 @@ function deasyncSharp(image, sharpFunction) {
 
   // Call function with callback
   image[sharpFunction].bind(image)((error, data) => {
-    if (error) throw error
+    if (error) {
+      throw error
+    }
     result = data
   })
 
