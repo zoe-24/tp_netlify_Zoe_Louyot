@@ -15,7 +15,10 @@ module.exports = markdownIt({
   .use((md) => {
     md.renderer.rules.image = (tokens, index) => {
       const token = tokens[index]
+
       const src = token.attrs[token.attrIndex('src')][1]
+      const alt = token.content
+
       const width =
         token.attrIndex('width') > 0
           ? token.attrs[token.attrIndex('width')][1]
@@ -24,7 +27,6 @@ module.exports = markdownIt({
         token.attrIndex('height') > 0
           ? token.attrs[token.attrIndex('height')][1]
           : null
-      const alt = token.content
 
       // Do not process absolute images or GIF's
       if (src.match('^([A-Za-z]+://|//)') || path.extname(src) === '.gif') {
