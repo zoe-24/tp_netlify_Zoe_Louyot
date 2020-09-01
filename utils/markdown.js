@@ -29,8 +29,11 @@ module.exports = markdownIt({
           : null
 
       // Do not process absolute images or GIF's
-      if (src.match('^([A-Za-z]+://|//)') || path.extname(src) === '.gif') {
-        const srcPath = path.posix.join('/', config.dir.media, src)
+      const isAbsolute = src.match('^([A-Za-z]+://|//)')
+      if (isAbsolute || path.extname(src) === '.gif') {
+        const srcPath = isAbsolute
+          ? src
+          : path.posix.join('/', config.dir.media, src)
         return `<img src="${srcPath}" alt="${alt}" ${
           width ? `width="${width}"` : ''
         } ${height ? `height="${height}"` : ''} loading="lazy">`
