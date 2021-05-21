@@ -1,14 +1,22 @@
+// const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
-  future: {
-    removeDeprecatedGapUtilities: true,
-    purgeLayersByDefault: true,
-  },
-  purge: {
-    enabled: false,
-  },
+  purge: ['./src/**/*.{njk,md,js}'],
+  darkMode: false, // or 'media' or 'class'
+  mode: 'jit',
   theme: {
-    extend: {},
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: 'inherit',
+          },
+        },
+      }),
+    },
+    container: {
+      center: true,
+    },
   },
-  variants: {},
-  plugins: [],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
 }

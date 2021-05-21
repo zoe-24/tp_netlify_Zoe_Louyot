@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en-us" class="antialiased font-normal text-gray-700 bg-white">
+    <head>
+        {% include "head.njk" %}
+        {% if site.isProduction %}
+            {% set css %}{% include "app.compiled.css" %}{% endset %}
+            <style> 
+                {{ css | safe }}
+            </style>
+        {% else %}
+            <link rel="stylesheet" href="/static/app.compiled.css">
+        {% endif %}
+    </head>
+    <body>
+        <header role="banner" class="p-6">
+            <div class="container">
+                <a href="/" rel="home">{{ site.title }}</a>
+            </div>
+        </header>
+        <main>
+            {{ content | safe }}
+        </main>
+        <footer role="contentinfo">
+
+        </footer>
+        <script src="/static/app.bundled.js"></script>
+    </body>
+</html>

@@ -1,23 +1,20 @@
-const path = require('path')
-const TerserJSPlugin = require('terser-webpack-plugin')
+const isProduction = process.env.NODE_ENV === 'production'
 
 module.exports = {
-  entry: path.resolve(__dirname, 'src/assets/scripts/main.js'),
+  mode: isProduction ? 'production' : 'development',
+  entry: {
+    app: __dirname + '/src/_assets/js/app.js',
+  },
   output: {
-    path: path.resolve(__dirname, 'dist/assets'),
+    path: isProduction ? __dirname + '/dist/static' : __dirname + '/src/static', // `/dist` is the destination
+    filename: 'app.bundled.js', // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
   },
-  optimization: {
-    minimizer: [new TerserJSPlugin({})],
-  },
-  plugins: [],
   module: {
     rules: [
       {
-        test: /\.m?js$/,
+        test: /\.js$/, // rule for .js files
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-        },
+        loader: 'babel-loader', // apply this loader for js files
       },
     ],
   },

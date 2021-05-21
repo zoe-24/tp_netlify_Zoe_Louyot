@@ -1,110 +1,56 @@
-require('module-alias/register')
 const fs = require('fs')
-
-const pluginRss = require('@11ty/eleventy-plugin-rss')
-const pluginNavigation = require('@11ty/eleventy-navigation')
-
+const plugins = require('./utils/plugins')
+const { shortcodes, asyncShortcodes } = require('./utils/shortcodes')
 const filters = require('./utils/filters')
 const transforms = require('./utils/transforms')
-const shortcodes = require('./utils/shortcodes')
-const markdown = require('./utils/markdown')
-
-// You can now require config options using @config
-const config = require('@config')
+const collections = require('./utils/collections')
 
 module.exports = function (eleventyConfig) {
-  /**
-   * Add plugins
-   *
-   * @link https://www.11ty.dev/docs/plugins/
-   */
-  eleventyConfig.addPlugin(pluginRss)
-  eleventyConfig.addPlugin(pluginNavigation)
+  // Copy to build dir (See. 1.1)
+  eleventyConfig.addPassthroughCopy('src/static')
 
-  /**
-   * Add filters
-   *
-   * @link https://www.11ty.io/docs/filters/
-   */
-  Object.keys(filters).forEach((filterName) => {
-    eleventyConfig.addFilter(filterName, filters[filterName])
+  // This allows Eleventy to watch for file changes during local development.
+  eleventyConfig.setUseGitIgnore(false)
+
+  // Plugins
+  plugins.forEach((plugin) => {
+    eleventyConfig.addPlugin(plugin)
   })
 
-  /**
-   * Add Transforms
-   *
-   * @link https://www.11ty.io/docs/config/#transforms
-   */
-  Object.keys(transforms).forEach((transformName) => {
-    eleventyConfig.addTransform(transformName, transforms[transformName])
+  // Shortcodes
+  Object.keys(shortcodes).forEach((name) => {
+    eleventyConfig.addShortcode(name, shortcodes[name])
   })
 
-  /**
-   * Add shortcodes
-   *
-   * @link https://www.11ty.io/docs/shortcodes/
-   */
-  Object.keys(shortcodes).forEach((shortcodeName) => {
-    eleventyConfig.addShortcode(shortcodeName, shortcodes[shortcodeName])
+  // Async Shortcodes
+  Object.keys(asyncShortcodes).forEach((name) => {
+    eleventyConfig.addAsyncShortcode(name, asyncShortcodes[name])
   })
 
-  /**
-   * Add custom watch targets
-   *
-   * @link https://www.11ty.dev/docs/config/#add-your-own-watch-targets
-   */
-  eleventyConfig.addWatchTarget('./tailwind.config.js')
-  eleventyConfig.addWatchTarget('./src/assets')
-  eleventyConfig.addWatchTarget('./src/media')
+  // Filters
+  Object.keys(filters).forEach((name) => {
+    eleventyConfig.addFilter(name, filters[name])
+  })
 
-  /**
-   * Passthrough file copy
-   *
-   * @link https://www.11ty.io/docs/copy/
-   */
-  eleventyConfig.addPassthroughCopy({ 'src/assets/scripts/sw.js': 'sw.js' })
-  eleventyConfig.addPassthroughCopy('src/assets/images')
-  eleventyConfig.addPassthroughCopy('src/assets/fonts')
-  eleventyConfig.addPassthroughCopy('src/site.webmanifest')
-  eleventyConfig.addPassthroughCopy('src/robots.txt')
-  eleventyConfig.addPassthroughCopy('src/favicon.ico')
-  eleventyConfig.addPassthroughCopy('src/media')
+  // Transforms
+  Object.keys(transforms).forEach((name) => {
+    eleventyConfig.addTransform(name, transforms[name])
+  })
 
-  /**
-   * Set custom markdown library instance
-   *
-   * @link https://www.11ty.dev/docs/languages/liquid/#optional-set-your-own-library-instance
-   */
-  eleventyConfig.setLibrary('md', markdown)
+  // Collections
+  Object.keys(collections).forEach((name) => {
+    eleventyConfig.addCollection(name, collections[name])
+  })
 
-  /**
-   * Add layout aliases
-   *
-   * @link https://www.11ty.dev/docs/layouts/#layout-aliasing
-   */
-  eleventyConfig.addLayoutAlias('base', 'base.njk')
-  eleventyConfig.addLayoutAlias('page', 'page.njk')
-
-  /**
-   * Opts in to a full deep merge when combining the Data Cascade.
-   *
-   * @link https://www.11ty.dev/docs/data-deep-merge/#data-deep-merge
-   */
-  eleventyConfig.setDataDeepMerge(true)
-
-  /**
-   * Override BrowserSync Server options
-   *
-   * @link https://www.11ty.dev/docs/config/#override-browsersync-server-options
-   */
+  // Override BrowserSync Server Options
   eleventyConfig.setBrowserSyncConfig({
-    notify: true,
-    // Set local server 404 fallback
+    open: true,
     callbacks: {
-      ready: function (err, browserSync) {
-        const content_404 = fs.readFileSync('dist/404/index.html')
-
-        browserSync.addMiddleware('*', (req, res) => {
+      ready: (err, bs) => {
+        bs.addMiddleware('*', (req, res) => {
+          const content_404 = fs.readFileSync('dist/404.html')
+          // Add 404 http status code in request header.
+          res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' })
           // Provides the 404 content without redirect.
           res.write(content_404)
           res.end()
@@ -114,10 +60,16 @@ module.exports = function (eleventyConfig) {
   })
 
   return {
-    dir: config.dir,
-    passthroughFileCopy: true,
-    templateFormats: ['njk', 'md', '11ty.js'],
+    dir: {
+      input: 'src/',
+      output: 'dist',
+      includes: '_includes',
+      layouts: '_layouts',
+    },
+    templateFormats: ['html', 'md', 'njk', 'ico'],
     htmlTemplateEngine: 'njk',
-    markdownTemplateEngine: 'njk',
+
+    // 1.1 Enable eleventy to pass dirs specified above
+    passthroughFileCopy: true,
   }
 }

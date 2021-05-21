@@ -1,0 +1,12 @@
+---
+layout: base.njk
+title: Welcome
+---
+
+{%- from "macros.njk" import component -%}
+
+<div class="p-6">
+    <div class="container">
+        {{ component("headings/title", { content: "Title Component" }) }}
+    </div>
+</div>

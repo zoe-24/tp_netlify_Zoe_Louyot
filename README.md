@@ -1,17 +1,83 @@
 # Eleventy Starter
 
+A starter project built with Eleventy, Webpack and PostCSS.
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9b8df50f-2855-4db2-968f-a0e9a4221c83/deploy-status)](https://app.netlify.com/sites/ess-eleventy-starter/deploys)
 
 Demo: https://ess-eleventy-starter.netlify.app
 
-Eleventy Starter is a project scaffold for quickly starting a site with:
+## Contents
 
-- [Eleventy](https://11ty.dev) for templates and site generation.
-- [Webpack](https://webpack.js.org) for straightforward JS asset bundling.
-- [Alpine JS](https://github.com/alpinejs/alpine) A rugged, minimal framework for composing JavaScript behavior in your markup.
-- [Tailwindcss](https://tailwindcss.com) for a utility first CSS workflow.
-- [PurgeCSS](https://www.purgecss.com/) for optimizing css output.
-- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) for Netlify dev pipeline and local replication of the prod environment.
+- [Project overview](#project-overview)
+- [Getting started](#getting-started)
+  - [Install dependencies](#install-dependencies)
+  - [Working locally](#working-locally)
+  - [Creating a production build](#creating-a-production-build)
+- [Deployment](#deployment)
+- [Credits](#credits)
+- Deploy this to your own site
+
+---
+
+## Project Overview
+
+- The project uses [Eleventy](https://11ty.io) as a static site generator
+- Default templating is [Nunjucks](https://mozilla.github.io/nunjucks/) (can be changed if you want)
+- PostCSS set up to handle:
+  - CSS Imports
+  - Tailwind CSS
+  - Autoprefixer
+- HTML minified in production
+- CSS inlined and minified in production
+- Webpack used to bundle scripts
+- Scripts optimized for production
+- Document `<head>` crafted using [htmlhead.dev](https://htmlhead.dev)
+
+---
+
+## Getting Started
+
+### Install dependencies
+
+```
+npm install
+```
+
+### Working locally
+
+Starts watch tasks to compile when changes detected
+
+```
+npm start
+```
+
+### Tailwind config viewer
+
+Spin up a [local UI tool](https://github.com/rogden/tailwind-config-viewer) for visualizing the Tailwind CSS configuration file.
+
+```
+npm run tw-config
+```
+
+### Creating a production build
+
+Minify HTML, compress JS, inline and minify CSS.
+
+```
+npm run build
+```
+
+---
+
+#### Credits
+
+- [Eleventy](https://11ty.io)
+- [PostCSS](https://github.com/postcss)
+- [Babel](https://babeljs.io/)
+- [Webpack](https://webpack.js.org/)
+- [Luxon](https://moment.github.io/luxon/)
+- [NPM Run All](https://www.npmjs.com/package/npm-run-all)
+- [HTML Minifier](https://www.npmjs.com/package/html-minifier)
 
 ## Deploy this to your own site
 
@@ -19,58 +85,3 @@ These builders are amazing—try them out to get your own Eleventy site in a few
 
 - [Get your own Eleventy web site on Netlify](https://app.netlify.com/start/deploy?repository=https://github.com/eastslopestudio/eleventy-starter)
 - [Get your own Eleventy web site on Vercel](https://vercel.com/import/project?template=eastslopestudio%2Feleventy-starter)
-
----
-
-## Prerequisites
-
-- [Node and NPM](https://nodejs.org/)
-- [Netlify CLI](https://www.npmjs.com/package/netlify-cli) _optional_
-
-## Running locally
-
-```bash
-# Create your project
-npx degit "eastslopestudio/eleventy-starter" my-app && cd my-app
-
-# install the project dependencies
-npm install
-
-# run the build and server locally
-npm run start
-
-# run the production build
-npm run build
-```
-
-## Netlify Dev
-
-```bash
-# Install the Netlify CLI globally
-npm install -g netlify-cli
-netlify dev
-```
-
-Serverless functions are located in `src/functions`
-
-A serverless functions pipeline is included via Netlify Dev. By running `netlify dev` you'll be able to execute any of your serverless functions directly like this:
-
-- /.netlify/functions/hello
-
-### Redirects and proxies
-
-Netlify's Redirects API can provide friendlier URLs as proxies to these URLs.
-
-- /api/hello
-
----
-
-## Credits
-
-My heartfelt thanks to these people, whom I shamelessly copied code and ideas from:
-
-- Phil Hawksworth: [EleventyOne](https://github.com/philhawksworth/eleventyone)
-- Mike Riethmuller: [Supermaya](https://github.com/MadeByMike/supermaya)
-- Zach Leatherman: [zachleat.com](https://github.com/zachleat/zachleat.com)
-- Max Böck [Eleventastic](https://github.com/maxboeck/eleventastic)
-- Greg Ives [Twelvety](https://github.com/gregives/Twelvety)
