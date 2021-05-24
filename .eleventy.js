@@ -25,22 +25,6 @@ module.exports = function (eleventyConfig) {
   // Watch changes to source assets that are compiled outside of 11ty
   eleventyConfig.addWatchTarget('./src/_assets/')
 
-  // Override BrowserSync Server Options
-  eleventyConfig.setBrowserSyncConfig({
-    callbacks: {
-      ready: (err, bs) => {
-        bs.addMiddleware('*', (req, res) => {
-          const content_404 = fs.readFileSync('dist/404.html')
-          // Add 404 http status code in request header.
-          res.writeHead(404, { 'Content-Type': 'text/html; charset=UTF-8' })
-          // Provides the 404 content without redirect.
-          res.write(content_404)
-          res.end()
-        })
-      },
-    },
-  })
-
   return {
     dir: {
       input: 'src/',
