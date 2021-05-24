@@ -14,3 +14,12 @@ npm run prod
 npm run clean
 npm run lint
 ```
+
+# Netlify
+
+Run the entire [Netlify platform](https://www.netlify.com/products/dev/) locally.
+Preview it all – site generation, functions, and edge logic.
+
+```sh
+netlify dev
+```
