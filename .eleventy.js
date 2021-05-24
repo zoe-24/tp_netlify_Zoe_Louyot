@@ -48,7 +48,7 @@ module.exports = function (eleventyConfig) {
       includes: '_includes',
       layouts: '_layouts',
     },
-    templateFormats: ['html', 'md', 'njk'],
+    templateFormats: ['html', 'md', 'njk', 'ico'],
     htmlTemplateEngine: 'njk',
     passthroughFileCopy: true,
   }
