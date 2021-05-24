@@ -1,21 +1,60 @@
-const isProduction = process.env.NODE_ENV === 'production'
+const path = require('path')
+const webpack = require('webpack')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
-  mode: isProduction ? 'production' : 'development',
-  entry: {
-    app: __dirname + '/src/_assets/js/app.js',
-  },
+  entry: [
+    path.resolve(__dirname, './src/_assets/js/site.js'),
+    path.resolve(__dirname, './src/_assets/css/site.css'),
+  ],
   output: {
-    path: isProduction ? __dirname + '/dist/static' : __dirname + '/src/static', // `/dist` is the destination
-    filename: 'app.bundled.js', // bundle created by webpack it will contain all our app logic. we will link to this .js file from our html page.
+    path: path.resolve(__dirname, 'dist/assets'),
+    filename: 'site.js',
   },
   module: {
     rules: [
       {
-        test: /\.js$/, // rule for .js files
-        exclude: /node_modules/,
-        loader: 'babel-loader', // apply this loader for js files
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+        },
+      },
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: { url: false },
+          },
+          {
+            loader: 'postcss-loader',
+          },
+        ],
       },
     ],
   },
+  optimization: {
+    minimizer: [new TerserPlugin({}), new CssMinimizerPlugin()],
+  },
+  plugins: [
+    new ProgressBarPlugin(),
+    new CleanWebpackPlugin({
+      verbose: true,
+    }),
+    new webpack.optimize.LimitChunkCountPlugin({
+      maxChunks: 1,
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'site.css',
+    }),
+  ],
+  mode: process.env.NODE_ENV,
 }

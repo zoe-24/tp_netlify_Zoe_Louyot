@@ -1,50 +1,32 @@
-const fs = require('fs')
-const plugins = require('./utils/plugins')
-const { shortcodes, asyncShortcodes } = require('./utils/shortcodes')
-const filters = require('./utils/filters')
-const transforms = require('./utils/transforms')
-const collections = require('./utils/collections')
+const htmlmin = require('html-minifier')
 
 module.exports = function (eleventyConfig) {
-  // Copy to build dir (See. 1.1)
+  // Copy static assets
   eleventyConfig.addPassthroughCopy('src/static')
 
-  // This allows Eleventy to watch for file changes during local development.
-  eleventyConfig.setUseGitIgnore(false)
+  // Minify HTML in production
+  eleventyConfig.addTransform('htmlmin', function (content, outputPath) {
+    // Eleventy 1.0+: use this.inputPath and this.outputPath instead
+    if (
+      process.env.ELEVENTY_ENV === 'production' &&
+      outputPath &&
+      outputPath.endsWith('.html')
+    ) {
+      return htmlmin.minify(content, {
+        useShortDoctype: true,
+        removeComments: true,
+        collapseWhitespace: true,
+      })
+    }
 
-  // Plugins
-  plugins.forEach((plugin) => {
-    eleventyConfig.addPlugin(plugin)
+    return content
   })
 
-  // Shortcodes
-  Object.keys(shortcodes).forEach((name) => {
-    eleventyConfig.addShortcode(name, shortcodes[name])
-  })
-
-  // Async Shortcodes
-  Object.keys(asyncShortcodes).forEach((name) => {
-    eleventyConfig.addAsyncShortcode(name, asyncShortcodes[name])
-  })
-
-  // Filters
-  Object.keys(filters).forEach((name) => {
-    eleventyConfig.addFilter(name, filters[name])
-  })
-
-  // Transforms
-  Object.keys(transforms).forEach((name) => {
-    eleventyConfig.addTransform(name, transforms[name])
-  })
-
-  // Collections
-  Object.keys(collections).forEach((name) => {
-    eleventyConfig.addCollection(name, collections[name])
-  })
+  // Watch changes to source assets that are compiled outside of 11ty
+  eleventyConfig.addWatchTarget('./src/_assets/')
 
   // Override BrowserSync Server Options
   eleventyConfig.setBrowserSyncConfig({
-    open: true,
     callbacks: {
       ready: (err, bs) => {
         bs.addMiddleware('*', (req, res) => {
@@ -66,10 +48,8 @@ module.exports = function (eleventyConfig) {
       includes: '_includes',
       layouts: '_layouts',
     },
-    templateFormats: ['html', 'md', 'njk', 'ico'],
+    templateFormats: ['html', 'md', 'njk'],
     htmlTemplateEngine: 'njk',
-
-    // 1.1 Enable eleventy to pass dirs specified above
     passthroughFileCopy: true,
   }
 }

@@ -2,14 +2,8 @@
 <html lang="en-us" class="antialiased font-normal text-gray-700 bg-white">
     <head>
         {% include "head.njk" %}
-        {% if site.isProduction %}
-            {% set css %}{% include "app.compiled.css" %}{% endset %}
-            <style> 
-                {{ css | safe }}
-            </style>
-        {% else %}
-            <link rel="stylesheet" href="/static/app.compiled.css">
-        {% endif %}
+        <link rel="stylesheet" href="/assets/site.css">
+        <script src="/assets/site.js" defer></script>
     </head>
     <body>
         <header role="banner" class="p-6">
@@ -23,6 +17,5 @@
         <footer role="contentinfo">
 
         </footer>
-        <script src="/static/app.bundled.js"></script>
     </body>
 </html>
